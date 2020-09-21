@@ -1,4 +1,9 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
+
+
+
+
+
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
@@ -11,5 +16,7 @@
   ],
   "include": [
     "src/**/*.d.ts"
+   //"src/**/*.d.ts",
+    //"src/**/*.ts"
   ]
 }
