@@ -12,6 +12,7 @@ import { ProgressComponent } from './progress/progress.component';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { AccountsSettingsComponent } from './accounts-settings/accounts-settings.component';
 
 
 
@@ -21,13 +22,15 @@ import { FormsModule } from '@angular/forms';
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    AccountsSettingsComponent
   ],
   exports: [
     DashboardComponent,
     ProgressComponent,
     Grafica1Component,
-    PagesComponent
+    PagesComponent,
+    AccountsSettingsComponent
   ],
   imports: [
     CommonModule,
