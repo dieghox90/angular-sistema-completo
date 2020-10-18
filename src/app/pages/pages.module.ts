@@ -11,10 +11,12 @@ import { ProgressComponent } from './progress/progress.component';
 
 
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountsSettingsComponent } from './accounts-settings/accounts-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
+import { PerfilComponent } from './perfil/perfil.component';
 
 
 
@@ -27,7 +29,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     PagesComponent,
     AccountsSettingsComponent,
     PromesasComponent,
-    RxjsComponent
+    RxjsComponent,
+    UsuariosComponent,
+    PerfilComponent
   ],
   exports: [
     DashboardComponent,
@@ -41,6 +45,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     SharedModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     ComponentsModule
     
   ]
