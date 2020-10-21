@@ -1,3 +1,4 @@
+import { CargarUsuario } from './../interfaces/cargar-usuarios.interface';
 import { Usuario } from './../models/usuario.model';
 import { LoginForm } from './../interfaces/login-form.interface';
 import { environment } from './../../environments/environment';
@@ -34,6 +35,14 @@ export class UsuarioService {
 
   get uid(): string { 
     return this.usuario.uid;
+  }
+
+  get headers() { 
+    return {
+      headers: {
+        'x-token': this.token
+      }
+    }
   }
 
   googleInit() {
@@ -97,16 +106,12 @@ export class UsuarioService {
   }
 
   actualizarPerfil(data: { email: string, nombre: string,role:string }) {
-   //la data es igual a todo lo que tenga la data + el role que se obtenga del GET ROLE
+   //la data es igual a todo lo que tenga la data + el role que se obtenga del GET ROLE aqui obtenido desde el sservicio
     data = {
       ...data,
-      role: this.usuario.role
-    };
-    return  this.http.put(`${base_url}/usuarios/${this.uid}`, data, {
-      headers: {
-        'x-token': this.token
-      }
-    });
+      role:this.usuario.role
+    }
+    return this.http.put(`${base_url}/usuarios/${this.uid}`, data,this.headers);
   }
 
 
@@ -127,5 +132,31 @@ export class UsuarioService {
         })
       )
   }
+
+  cargarUsuarios(desde: number = 0) { 
+    const url = `${base_url}/usuarios?desde=${desde}`;
+    return this.http.get<CargarUsuario>(url, this.headers)
+      .pipe(
+        map(resp => {
+          const usuarios = resp.usuarios.map(
+            user => new Usuario(user.nombre,user.email,'',user.role,user.google,user.img,user.uid))
+          return {
+            total:resp.total,
+            usuarios
+          };
+        })
+    )
+  }
+
+  eliminar(usuario:Usuario) { 
+    const url = `${base_url}/usuarios/${usuario.uid}`;
+    return this.http.delete(url, this.headers);
+  }
+
+  guardarUsuario(usuario: Usuario) {
+    //la data es igual a todo lo que tenga la data + el role que se obtenga del GET ROLE
+  
+     return this.http.put(`${base_url}/usuarios/${usuario.uid}`, usuario,this.headers);
+   }
 
 }
